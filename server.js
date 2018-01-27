@@ -8,7 +8,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-    res.send('welcome to in-memoey-data');
+    res.send('testing out Mock-data');
   });
 
 const port = process.env.PORT || 5300;
