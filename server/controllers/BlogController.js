@@ -15,7 +15,7 @@ const BlogController = {
     };
     Object.assign(req.body, myBlog);
     blogModel.push(req.body);
-    res.status(201).json({
+    return res.status(201).json({
       message: 'added succesfully',
       users: blogModel[blogModel.length - 1]
     });
@@ -27,8 +27,26 @@ const BlogController = {
       result.push(blogModel[i]);
     }
     res.status(200).send(result);
-  }
+  },
 
+  modifyBlog(req, res) {
+    const { blogPost, blogTitle } = req.body;
+    let blog;
+    for (let i = 0; i < blogModel.length; i += 1) {
+      if (blogModel[i].id === Number(req.params.blogId)) {
+        blogModel[i].blogPost = blogPost;
+        blogModel[i].blogTitle = blogTitle;
+        blog = blogModel[i];
+        return res.status(200).json({
+          message: 'blogUpdated successfully',
+          blog
+        });
+      }
+      return res.status(404).json({
+        message: 'No blog found!'
+      });
+    }
+  }
 
 };
 
